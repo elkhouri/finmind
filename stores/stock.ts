@@ -8,14 +8,15 @@ interface Stock {
   date: string;
 }
 
-interface StockRevenue {
-  "date": string,
-  "stock_id": string,
-  "country": string,
-  "revenue": number,
-  "revenue_month": number,
-  "revenue_year": number,
-  "create_time": string
+export interface StockRevenue {
+  date: string,
+  stock_id: string,
+  country: string,
+  revenue: number,
+  revenue_month: number,
+  revenue_year: number,
+  create_time: string,
+  increase?: number
 }
 
 interface StockState {

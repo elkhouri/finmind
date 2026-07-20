@@ -11,11 +11,12 @@ import { ChartsTooltip } from '@mui/x-charts/ChartsTooltip';
 import { ChartsAxisHighlight } from '@mui/x-charts/ChartsAxisHighlight';
 import { stockRevenue } from '../lib/mockData';
 import { useMemo } from 'react';
+import { StockRevenue } from '../stores/stock';
 
 export default function Combining() {
   const stockData = stockRevenue.slice(12);
   const yearlyIncrease = useMemo(() => {
-    return stockRevenue.reduce((acc, month) => {
+    return stockRevenue.reduce<StockRevenue[]>((acc, month) => {
       const nowDate = new Date(month.date);
       const lastYearDate = new Date(nowDate);
       lastYearDate.setFullYear(lastYearDate.getFullYear() - 1);
