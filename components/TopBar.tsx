@@ -10,16 +10,16 @@ import {
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { getStockInfo } from '../lib/data';
+import { useStockStore } from '../stores/stock';
 
 export default function TopBar() {
   const [stockInfo, setStockInfo] = useState<any[]>([]);
-  const [currentStock, setCurrentStock] = useState<any>({});
+  const { setCurrentStock } = useStockStore()
 
   useEffect(() => {
     const fetchStockInfo = async () => {
       const data = await getStockInfo();
       setStockInfo(data);
-
     };
 
     fetchStockInfo();
@@ -32,12 +32,6 @@ export default function TopBar() {
           self.findIndex(item => item.stock_id === value.stock_id) === index
         );
       })
-      .map((stock) => {
-        return {
-          label: `${stock.stock_name} (${stock.stock_id})`,
-          id: stock.stock_id + stock.industry_category + stock.type,
-        }
-      });
   }, [stockInfo]);
 
   return (
@@ -47,8 +41,8 @@ export default function TopBar() {
         <Autocomplete
           disablePortal
           options={stockOptions}
-          getOptionKey={(option) => option.id}
-          getOptionLabel={(option) => option.label}
+          getOptionKey={(option) => option.stock_id + option.industry_category + option.type}
+          getOptionLabel={(option) => `${option.stock_name} (${option.stock_id})`}
           sx={{ width: 400 }}
           size="small"
           popupIcon={<SearchIcon />}
