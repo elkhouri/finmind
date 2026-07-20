@@ -1,50 +1,60 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import {
   AppBar,
   Toolbar,
   TextField,
-  InputAdornment,
   Box,
+  Autocomplete
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import { getStockInfo } from '../lib/data';
 
 export default function TopBar() {
-  const [searchValue, setSearchValue] = useState('');
+  const [stockInfo, setStockInfo] = useState<any[]>([]);
+  const [currentStock, setCurrentStock] = useState<any>({});
 
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(event.target.value);
-  };
+  useEffect(() => {
+    const fetchStockInfo = async () => {
+      const data = await getStockInfo();
+      setStockInfo(data);
+
+    };
+
+    fetchStockInfo();
+  }, []);
+
+  const stockOptions = useMemo(() => {
+    return stockInfo
+      .filter((value, index, self) => {
+        return (
+          self.findIndex(item => item.stock_id === value.stock_id) === index
+        );
+      })
+      .map((stock) => {
+        return {
+          label: `${stock.stock_name} (${stock.stock_id})`,
+          id: stock.stock_id + stock.industry_category + stock.type,
+        }
+      });
+  }, [stockInfo]);
 
   return (
-    <AppBar position="static">
-      <Toolbar className="bg-white">
+    <AppBar position="static" >
+      <Toolbar className="bg-white" >
         <Box sx={{ flexGrow: 1 }} />
-        <TextField
-          className="font-semibold"
-          placeholder="輸入台／美股代號，查看公司價值"
+        <Autocomplete
+          disablePortal
+          options={stockOptions}
+          getOptionKey={(option) => option.id}
+          getOptionLabel={(option) => option.label}
+          sx={{ width: 400 }}
           size="small"
-          variant="outlined"
-          value={searchValue}
-          onChange={handleSearchChange}
-          slotProps={{
-            input: {
-              endAdornment: (
-                <InputAdornment position="end">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }
-          }}
-          sx={{
-            width: 400,
-            backgroundColor: '#FAFAFA',
-            color: '#434343',
-            borderRadius: 3,
-            '& .MuiOutlinedInput-root': {
-              color: 'inherit',
-            },
+          popupIcon={<SearchIcon />}
+          renderInput={(params) => <TextField {...params} placeholder="輸入台／美股代號，查看公司價值" />}
+          onChange={(event, newValue) => {
+            setCurrentStock(newValue);
           }}
         />
         <Box sx={{ flexGrow: 1 }} />
