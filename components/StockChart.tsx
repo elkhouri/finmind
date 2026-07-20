@@ -9,34 +9,11 @@ import { ChartsXAxis } from '@mui/x-charts/ChartsXAxis';
 import { ChartsYAxis } from '@mui/x-charts/ChartsYAxis';
 import { ChartsTooltip } from '@mui/x-charts/ChartsTooltip';
 import { ChartsAxisHighlight } from '@mui/x-charts/ChartsAxisHighlight';
-import { stockRevenue } from '../lib/mockData';
-import { useMemo } from 'react';
-import { StockRevenue } from '../stores/stock';
+import { useDisplayStock, useDisplayYearlyIncrease } from '../stores/stock';
 
-export default function Combining() {
-  const stockData = stockRevenue.slice(12);
-  const yearlyIncrease = useMemo(() => {
-    return stockRevenue.reduce<StockRevenue[]>((acc, month) => {
-      const nowDate = new Date(month.date);
-      const lastYearDate = new Date(nowDate);
-      lastYearDate.setFullYear(lastYearDate.getFullYear() - 1);
-
-      const day = stockRevenue.find(
-        (day) =>
-          new Date(day.date).getFullYear() === lastYearDate.getFullYear() &&
-          new Date(day.date).getMonth() === lastYearDate.getMonth(),
-      );
-
-      if (!day) {
-        return acc;
-      }
-      
-      const increase = (month.revenue / day.revenue - 1) * 100;
-      const newMonth = { ...month, increase };
-      acc.push(newMonth);
-      return acc;
-    }, []);
-  }, [stockRevenue])
+export default function StockChart() {
+  const stockData = useDisplayStock();
+  const yearlyIncrease = useDisplayYearlyIncrease();
 
   const series = [
     {

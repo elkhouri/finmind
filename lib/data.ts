@@ -8,7 +8,7 @@ export async function getStockInfo () {
 }
 
 export async function getStockRevenue (stockId: string, startDate:string) {
-  return stockRevenue.data
+  return stockRevenue;
   // const response = await fetch(`https://api.finmindtrade.com/api/v4/data?dataset=TaiwanStockMonthRevenue&data_id=${stockId}`);
   // const { data } = await response.json();
   // return data;

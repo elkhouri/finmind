@@ -42,3 +42,32 @@ export const useStockStore = create<StockState>()((set) => ({
   setCurrentRevenue: (newRevenue: Array<StockRevenue>) => set({ currentRevenue: newRevenue }),
   setYearPeriod: (year: number) => set({ yearPeriod: year })
 }))
+
+export function useDisplayStock() {
+  const currentRevenue = useStockStore((state) => state.currentRevenue);
+  return currentRevenue.slice(12);
+}
+
+export function useDisplayYearlyIncrease() {
+  const currentRevenue = useStockStore((state) => state.currentRevenue);
+  return currentRevenue.reduce<StockRevenue[]>((acc, month) => {
+    const nowDate = new Date(month.date);
+    const lastYearDate = new Date(nowDate);
+    lastYearDate.setFullYear(lastYearDate.getFullYear() - 1);
+
+    const day = currentRevenue.find(
+      (day) =>
+        new Date(day.date).getFullYear() === lastYearDate.getFullYear() &&
+        new Date(day.date).getMonth() === lastYearDate.getMonth(),
+    );
+
+    if (!day) {
+      return acc;
+    }
+    
+    const increase = (month.revenue / day.revenue - 1) * 100;
+    const newMonth = { ...month, increase };
+    acc.push(newMonth);
+    return acc;
+  }, []);
+}
