@@ -15,3 +15,22 @@ body {
   background: var(--background);
   color: var(--foreground);
 }
+
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+td.sticky {
+  position: sticky;
+  z-index: 2;
+  left: 0;
+}
+td {
+  background: #FFFFFF;
+  border: 1px solid #DCDFE2;
+}
+
+tr:nth-child(odd) td {
+  background: #F6F8FA;
+}
