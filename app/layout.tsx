@@ -4,6 +4,7 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v16-appRouter';
 import "./globals.css";
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../theme';
+import TopBar from '../components/TopBar';
 
 const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
@@ -30,6 +31,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
           <ThemeProvider theme={theme}>
+            <TopBar />
             {children}
           </ThemeProvider>
         </AppRouterCacheProvider>
