@@ -29985,3 +29985,73 @@ export const stockInfo = {
         }
     ]
 }
+
+export const stockRevenue = {
+    "msg": "success",
+    "status": 200,
+    "data": [
+        {
+            "date": "2026-01-01",
+            "stock_id": "2330",
+            "country": "Taiwan",
+            "revenue": 335003568000,
+            "revenue_month": 12,
+            "revenue_year": 2025,
+            "create_time": ""
+        },
+        {
+            "date": "2026-02-01",
+            "stock_id": "2330",
+            "country": "Taiwan",
+            "revenue": 401255128000,
+            "revenue_month": 1,
+            "revenue_year": 2026,
+            "create_time": ""
+        },
+        {
+            "date": "2026-03-01",
+            "stock_id": "2330",
+            "country": "Taiwan",
+            "revenue": 317656613000,
+            "revenue_month": 2,
+            "revenue_year": 2026,
+            "create_time": "2026-04-21"
+        },
+        {
+            "date": "2026-04-01",
+            "stock_id": "2330",
+            "country": "Taiwan",
+            "revenue": 415191699000,
+            "revenue_month": 3,
+            "revenue_year": 2026,
+            "create_time": "2026-04-21"
+        },
+        {
+            "date": "2026-05-01",
+            "stock_id": "2330",
+            "country": "Taiwan",
+            "revenue": 410725118000,
+            "revenue_month": 4,
+            "revenue_year": 2026,
+            "create_time": "2026-05-08"
+        },
+        {
+            "date": "2026-06-01",
+            "stock_id": "2330",
+            "country": "Taiwan",
+            "revenue": 416975163000,
+            "revenue_month": 5,
+            "revenue_year": 2026,
+            "create_time": "2026-06-10"
+        },
+        {
+            "date": "2026-07-01",
+            "stock_id": "2330",
+            "country": "Taiwan",
+            "revenue": 442679969000,
+            "revenue_month": 6,
+            "revenue_year": 2026,
+            "create_time": "2026-07-13"
+        }
+    ]
+}

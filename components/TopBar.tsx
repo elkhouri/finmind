@@ -9,12 +9,12 @@ import {
   Autocomplete
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import { getStockInfo } from '../lib/data';
+import { getStockInfo, getStockRevenue } from '../lib/data';
 import { useStockStore } from '../stores/stock';
 
 export default function TopBar() {
   const [stockInfo, setStockInfo] = useState<any[]>([]);
-  const { setCurrentStock } = useStockStore()
+  const { setCurrentStock, currentStock, setCurrentRevenue } = useStockStore()
 
   useEffect(() => {
     const fetchStockInfo = async () => {
@@ -24,6 +24,16 @@ export default function TopBar() {
 
     fetchStockInfo();
   }, []);
+
+  useEffect(() => {
+    const fetchStockRevenue = async () => {
+      if (!currentStock) return;
+      const data = await getStockRevenue(currentStock.stock_id, '2026-01-01');
+      setCurrentRevenue(data);
+    };
+
+    fetchStockRevenue();
+  }, [currentStock]);
 
   const stockOptions = useMemo(() => {
     return stockInfo
