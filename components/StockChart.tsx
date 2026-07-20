@@ -37,7 +37,6 @@ export default function Combining() {
       return acc;
     }, []);
   }, [stockRevenue])
-  console.log('yearlyIncrease', yearlyIncrease);
 
   const series = [
     {

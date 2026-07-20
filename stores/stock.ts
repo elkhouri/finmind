@@ -22,8 +22,10 @@ export interface StockRevenue {
 interface StockState {
   currentStock: Stock | null;
   currentRevenue: Array<StockRevenue>;
+  yearPeriod: number;
   setCurrentStock: (newStock: Stock) => void;
   setCurrentRevenue: (newRevenue: Array<StockRevenue>) => void;
+  setYearPeriod: (year: number) => void;
 }
 
 export const useStockStore = create<StockState>()((set) => ({
@@ -35,6 +37,8 @@ export const useStockStore = create<StockState>()((set) => ({
     date: ''
   },
   currentRevenue: [],
+  yearPeriod: 5,
   setCurrentStock: (newStock: Stock) => set({ currentStock: newStock }),
-  setCurrentRevenue: (newRevenue: Array<StockRevenue>) => set({ currentRevenue: newRevenue })
+  setCurrentRevenue: (newRevenue: Array<StockRevenue>) => set({ currentRevenue: newRevenue }),
+  setYearPeriod: (year: number) => set({ yearPeriod: year })
 }))
