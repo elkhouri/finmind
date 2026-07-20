@@ -14,7 +14,7 @@ import { useStockStore } from '../stores/stock';
 
 export default function TopBar() {
   const [stockInfo, setStockInfo] = useState<any[]>([]);
-  const { setCurrentStock, currentStock, setCurrentRevenue } = useStockStore()
+  const { setCurrentStock, currentStock, setCurrentRevenue, yearPeriod } = useStockStore()
 
   useEffect(() => {
     const fetchStockInfo = async () => {
@@ -27,13 +27,13 @@ export default function TopBar() {
 
   useEffect(() => {
     const fetchStockRevenue = async () => {
-      if (!currentStock) return;
-      const data = await getStockRevenue(currentStock.stock_id, '2026-01-01');
+      if (!currentStock || !currentStock.stock_id) return;
+      const data = await getStockRevenue(currentStock.stock_id, yearPeriod);
       setCurrentRevenue(data);
     };
 
     fetchStockRevenue();
-  }, [currentStock]);
+  }, [currentStock, yearPeriod]);
 
   const stockOptions = useMemo(() => {
     return stockInfo

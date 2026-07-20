@@ -25,7 +25,7 @@ export default function TableBox() {
               <td className="sticky whitespace-nowrap py-3 px-5 font-semibold">年度月份</td>
               {stockData.map((stock) => (
                 <td key={stock.date} className="whitespace-nowrap py-3 px-5 font-semibold">
-                  {new Date(stock.date).getFullYear().toString() + new Date(stock.date).getMonth().toString() }
+                  {new Date(stock.date).getFullYear().toString() + (new Date(stock.date).getMonth() + 1).toString()}
                 </td>
               ))}
             </tr>

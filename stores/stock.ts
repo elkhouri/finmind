@@ -45,11 +45,17 @@ export const useStockStore = create<StockState>()((set) => ({
 
 export function useDisplayStock() {
   const currentRevenue = useStockStore((state) => state.currentRevenue);
+  if (!currentRevenue || currentRevenue.length === 0) {
+    return [];
+  }
   return currentRevenue.slice(12);
 }
 
 export function useDisplayYearlyIncrease() {
   const currentRevenue = useStockStore((state) => state.currentRevenue);
+  if (!currentRevenue || currentRevenue.length === 0) {
+    return [];
+  }
   return currentRevenue.reduce<StockRevenue[]>((acc, month) => {
     const nowDate = new Date(month.date);
     const lastYearDate = new Date(nowDate);
