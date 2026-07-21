@@ -48,32 +48,21 @@ export function useDisplayStock() {
   if (!currentRevenue || currentRevenue.length === 0) {
     return [];
   }
-  return currentRevenue.slice(12);
+  return currentRevenue.slice(12).map(x => ({...x, revenueShort: x.revenue / 1000}));
 }
 
 export function useDisplayYearlyIncrease() {
   const currentRevenue = useStockStore((state) => state.currentRevenue);
-  if (!currentRevenue || currentRevenue.length === 0) {
+  if (!currentRevenue || currentRevenue.length < 12 ) {
     return [];
   }
-  return currentRevenue.reduce<StockRevenue[]>((acc, month) => {
-    const nowDate = new Date(month.date);
-    const lastYearDate = new Date(nowDate);
-    lastYearDate.setFullYear(lastYearDate.getFullYear() - 1);
 
-    const day = currentRevenue.find(
-      (day) =>
-        new Date(day.date).getFullYear() === lastYearDate.getFullYear() &&
-        new Date(day.date).getMonth() === lastYearDate.getMonth(),
-    );
-
-    if (!day) {
-      return acc;
-    }
-    
-    const increase = (month.revenue / day.revenue - 1) * 100;
-    const newMonth = { ...month, increase };
-    acc.push(newMonth);
-    return acc;
-  }, []);
+  const increases = []
+  for (let i = 12; i < currentRevenue.length; i++) {
+    const thisMonth = currentRevenue[i]
+    const lastYearMonth = currentRevenue[i - 12]
+    const increase = (thisMonth.revenue / lastYearMonth.revenue - 1) * 100;
+    increases.push({ ...thisMonth, increase})
+  }
+  return increases
 }

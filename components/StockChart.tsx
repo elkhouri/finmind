@@ -21,7 +21,7 @@ export default function StockChart() {
       yAxisId: 'revenue',
       label: '每月營收',
       color: '#E8AF00',
-      data: stockData.map((day) => day.revenue),
+      data: stockData.map((day) => day.revenueShort),
       highlightScope: { highlight: 'item' },
     },
     {
@@ -50,13 +50,13 @@ export default function StockChart() {
           },
         ]}
         yAxis={[
-          { id: 'price', scaleType: 'linear', position: 'right', width: 50 },
+          { id: 'price', scaleType: 'linear', position: 'right', width: 60 },
           {
             id: 'revenue',
             scaleType: 'linear',
             position: 'left',
-            valueFormatter: (value) => `${(value / 1000).toLocaleString()}`,
-            width: 55,
+            valueFormatter: (value) => value.toLocaleString(),
+            width: 90,
           },
         ]}
       >
@@ -78,12 +78,12 @@ export default function StockChart() {
         <ChartsYAxis
           label="單月營收年增率 (%)"
           axisId="price"
-          tickLabelStyle={{ fontSize: 10 }}
+          tickLabelStyle={{ fontSize: 12 }}
         />
         <ChartsYAxis
           label="每月營收"
           axisId="revenue"
-          tickLabelStyle={{ fontSize: 10 }}
+          tickLabelStyle={{ fontSize: 12 }}
         />
         <ChartsTooltip />
       </ChartsContainer>

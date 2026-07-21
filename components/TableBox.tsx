@@ -33,7 +33,7 @@ export default function TableBox() {
               <td className="sticky whitespace-nowrap py-3.5 px-5 font-semibold">每月營收</td>
               {stockData.map((stock) => (
                 <td key={stock.date} className="whitespace-nowrap py-3.5 px-5 text-right">
-                  { stock.revenue.toLocaleString() }
+                  { stock.revenueShort.toLocaleString() }
                 </td>
               ))}
             </tr>
