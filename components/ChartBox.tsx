@@ -4,10 +4,24 @@ import Button from '@mui/material/Button';
 import StockChart from './StockChart';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import CircularProgress from '@mui/material/CircularProgress';
 import { useStockStore } from '../stores/stock';
 
 export default function ChartBox() {
-  const { yearPeriod, setYearPeriod, currentRevenue } = useStockStore()
+  const { yearPeriod, setYearPeriod, currentRevenue, isLoading } = useStockStore()
+  function ChartDisplay () {
+    if (isLoading) {
+      return (
+        <div className="flex justify-center">
+          <CircularProgress aria-label="Loading…" />
+        </div>
+      )
+    } else if (currentRevenue?.length > 0) {
+      return <StockChart /> 
+    } else {
+      return <div className="text-center text-gray-600">無資料</div>
+    }
+  }
 
   return (
     <div className="mt-1.5 border border-gray-300 bg-white rounded-sm py-4 px-5">
@@ -23,12 +37,7 @@ export default function ChartBox() {
           <MenuItem value={8}>近 8 年</MenuItem>
         </Select>
       </div>
-
-      {
-        currentRevenue?.length > 0 ?
-        <StockChart /> : 
-        <div className="text-center text-gray-600">無資料</div>
-      }
+      <ChartDisplay />
     </div>
   );
 }

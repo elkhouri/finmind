@@ -27,6 +27,10 @@ interface StockState {
   setCurrentStock: (newStock: Stock | null) => void;
   setCurrentRevenue: (newRevenue: Array<StockRevenue>) => void;
   setYearPeriod: (year: number) => void;
+  isLoading: boolean;
+  error: string;
+  setIsLoading: (flag: boolean) => void;
+  setError: (e: string) => void;
 }
 
 export const useStockStore = create<StockState>()((set) => ({
@@ -35,13 +39,17 @@ export const useStockStore = create<StockState>()((set) => ({
     stock_id: '',
     stock_name: '',
     type: '',
-    date: ''
+    date: '',
   },
   currentRevenue: [],
   yearPeriod: 5,
   setCurrentStock: (newStock: Stock | null) => set({ currentStock: newStock }),
   setCurrentRevenue: (newRevenue: Array<StockRevenue>) => set({ currentRevenue: newRevenue }),
-  setYearPeriod: (year: number) => set({ yearPeriod: year })
+  setYearPeriod: (year: number) => set({ yearPeriod: year }),
+  isLoading: false,
+  error: '',
+  setIsLoading: (flag: boolean) => set({ isLoading: flag }),
+  setError: (e: string) => set({ error: e })
 }))
 
 export function useDisplayStock(): StockRevenue[] {

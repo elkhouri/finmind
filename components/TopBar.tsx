@@ -14,14 +14,12 @@ import { type Stock, useStockStore } from '../stores/stock';
 
 export default function TopBar() {
   const [stockInfo, setStockInfo] = useState<Stock[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
-  const { setCurrentStock, currentStock, setCurrentRevenue, yearPeriod } = useStockStore()
+  const { setCurrentStock, currentStock, setCurrentRevenue, yearPeriod, isLoading, setIsLoading, error, setError } = useStockStore()
 
   // fetch stock info once since it doesn't change much
   useEffect(() => {
     const fetchStockInfo = async () => {
-      setError(null);
+      setError('');
       try {
         const data = await getStockInfo();
         setStockInfo(data);
@@ -43,7 +41,7 @@ export default function TopBar() {
 
     const debounceTimer = setTimeout(async () => {
       try {
-        setError(null);
+        setError('');
         
         const data = await getStockRevenue(currentStock.stock_id, yearPeriod);
         
