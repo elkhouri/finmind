@@ -3,7 +3,9 @@
 import Box from '@mui/material/Box';
 import { BarPlot } from '@mui/x-charts/BarChart';
 import { LineHighlightPlot, LinePlot } from '@mui/x-charts/LineChart';
-import { ChartsContainer } from '@mui/x-charts/ChartsContainer';
+import { ChartsDataProvider } from '@mui/x-charts/ChartsDataProvider';
+import { ChartsSurface } from '@mui/x-charts/ChartsSurface';
+import { ChartsLegend } from '@mui/x-charts/ChartsLegend';
 import { AllSeriesType } from '@mui/x-charts/models';
 import { ChartsXAxis } from '@mui/x-charts/ChartsXAxis';
 import { ChartsYAxis } from '@mui/x-charts/ChartsYAxis';
@@ -31,12 +33,13 @@ export default function StockChart() {
       label: '單月營收年增率 (%)',
       data: yearlyIncrease.map((day) => day.increase),
       highlightScope: { highlight: 'item' },
+      labelMarkType: 'square',
     },
   ] as AllSeriesType[];
 
   return (
     <Box sx={{ width: '100%', height: 400 }}>
-      <ChartsContainer
+      <ChartsDataProvider
         series={series}
         xAxis={[
           {
@@ -46,27 +49,28 @@ export default function StockChart() {
             valueFormatter: (value, context) => {
               if(context.location === 'tick') return new Date(value).getFullYear().toString()
               else return new Date(value).toLocaleDateString();},
-            height: 48,
+            height: 30,
           },
         ]}
         yAxis={[
-          { id: 'price', scaleType: 'linear', position: 'right', width: 60 },
+          { id: 'price', scaleType: 'linear', position: 'right', width: 50 },
           {
             id: 'revenue',
             scaleType: 'linear',
             position: 'left',
             valueFormatter: (value) => value.toLocaleString(),
-            width: 90,
+            width: 'auto',
           },
         ]}
       >
+        <ChartsLegend direction="horizontal" />
+        <ChartsSurface>
         {/* <ChartsAxisHighlight x="line" /> */}
         <BarPlot />
         <LinePlot />
 
         <LineHighlightPlot />
         <ChartsXAxis
-          // label="Date"
           axisId="date"
           tickInterval={(value, index) => {
             return value.getMonth() === 0 || index === 0;
@@ -86,7 +90,8 @@ export default function StockChart() {
           tickLabelStyle={{ fontSize: 12 }}
         />
         <ChartsTooltip />
-      </ChartsContainer>
+      </ChartsSurface>
+      </ChartsDataProvider>
     </Box>
   );
 }
