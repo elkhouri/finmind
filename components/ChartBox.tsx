@@ -27,7 +27,7 @@ export default function ChartBox() {
       {
         currentRevenue?.length > 0 ?
         <StockChart /> : 
-        <div className="text-center">無資料</div>
+        <div className="text-center text-gray-600">無資料</div>
       }
     </div>
   );
