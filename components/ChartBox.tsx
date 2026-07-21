@@ -7,10 +7,10 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useStockStore } from '../stores/stock';
 
 export default function ChartBox() {
-  const { yearPeriod, setYearPeriod } = useStockStore()
+  const { yearPeriod, setYearPeriod, currentRevenue } = useStockStore()
 
   return (
-    <div className="mt-1.5 border border-gray-300 bg-white rounded-sm pt-4 px-5">
+    <div className="mt-1.5 border border-gray-300 bg-white rounded-sm py-4 px-5">
       <div className="mb-3 flex justify-between items-center">
         <Button variant="contained" disableElevation className="pointer-events-none">每月營收</Button>
         <Select
@@ -23,7 +23,12 @@ export default function ChartBox() {
           <MenuItem value={8}>近 8 年</MenuItem>
         </Select>
       </div>
-      <StockChart />
+
+      {
+        currentRevenue?.length > 0 ?
+        <StockChart /> : 
+        <div className="text-center">無資料</div>
+      }
     </div>
   );
 }
