@@ -5,7 +5,7 @@ import TableBox from '../components/TableBox';
 
 export default function Home() {
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="md">
       <StockIndicator />
       <ChartBox />
       <TableBox />

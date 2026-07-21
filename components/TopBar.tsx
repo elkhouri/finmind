@@ -45,8 +45,8 @@ export default function TopBar() {
   }, [stockInfo]);
 
   return (
-    <AppBar position="static" >
-      <Toolbar className="bg-white" >
+    <AppBar position="static" elevation={0} className="border-b border-b-gray-300">
+      <Toolbar className="bg-white py-2" variant="dense">
         <Box sx={{ flexGrow: 1 }} />
         <Autocomplete
           disablePortal
