@@ -9,6 +9,8 @@ import { ChartsLegend } from '@mui/x-charts/ChartsLegend';
 import { AllSeriesType } from '@mui/x-charts/models';
 import { ChartsXAxis } from '@mui/x-charts/ChartsXAxis';
 import { ChartsYAxis } from '@mui/x-charts/ChartsYAxis';
+import { ChartsGrid } from '@mui/x-charts/ChartsGrid';
+import { ChartsWrapper } from '@mui/x-charts/ChartsWrapper';
 import { ChartsTooltip } from '@mui/x-charts/ChartsTooltip';
 import { ChartsAxisHighlight } from '@mui/x-charts/ChartsAxisHighlight';
 import { useDisplayStock, useDisplayYearlyIncrease } from '../stores/stock';
@@ -38,7 +40,7 @@ export default function StockChart() {
   ] as AllSeriesType[];
 
   return (
-    <Box sx={{ width: '100%', height: 400 }}>
+    <Box sx={{ width: '100%', height: 400 }} className="relative">
       <ChartsDataProvider
         series={series}
         xAxis={[
@@ -53,7 +55,12 @@ export default function StockChart() {
           },
         ]}
         yAxis={[
-          { id: 'price', scaleType: 'linear', position: 'right', width: 50 },
+          {
+            id: 'price',
+            scaleType: 'linear',
+            position: 'right',
+            width: 50
+          },
           {
             id: 'revenue',
             scaleType: 'linear',
@@ -63,34 +70,40 @@ export default function StockChart() {
           },
         ]}
       >
-        <ChartsLegend direction="horizontal" />
-        <ChartsSurface>
-        {/* <ChartsAxisHighlight x="line" /> */}
-        <BarPlot />
-        <LinePlot />
+        <ChartsWrapper legendPosition={{horizontal: 'start'}}>
+          <ChartsLegend direction="horizontal" />
+          <div className="absolute left-10 top-0 text-sm font-semibold text-gray-500">千元</div>
+          <div className="absolute right-12 top-0 text-sm font-semibold text-gray-500">%</div>
+          <ChartsSurface>
+            {/* <ChartsAxisHighlight x="line" /> */}
+            <BarPlot />
+            <LinePlot />
+            <ChartsGrid vertical horizontal />
 
-        <LineHighlightPlot />
-        <ChartsXAxis
-          axisId="date"
-          tickInterval={(value, index) => {
-            return value.getMonth() === 0 || index === 0;
-          }}
-          tickLabelStyle={{
-            fontSize: 10,
-          }}
-        />
-        <ChartsYAxis
-          label="單月營收年增率 (%)"
-          axisId="price"
-          tickLabelStyle={{ fontSize: 12 }}
-        />
-        <ChartsYAxis
-          label="每月營收"
-          axisId="revenue"
-          tickLabelStyle={{ fontSize: 12 }}
-        />
-        <ChartsTooltip />
-      </ChartsSurface>
+            <LineHighlightPlot />
+            <ChartsXAxis
+              axisId="date"
+              tickInterval={(value, index) => {
+                return value.getMonth() === 0 || index === 0;
+              }}
+              tickLabelStyle={{
+                fontSize: 12,
+                fill: 'var(--color-gray-500)'
+              }}
+            />
+            <ChartsYAxis
+              // label="單月營收年增率 (%)"
+              axisId="price"
+              tickLabelStyle={{ fontSize: 12, fill: 'var(--color-gray-500)' }}
+            />
+            <ChartsYAxis
+              // label="每月營收"
+              axisId="revenue"
+              tickLabelStyle={{ fontSize: 12, fill: 'var(--color-gray-500)' }}
+            />
+            <ChartsTooltip />
+          </ChartsSurface>
+        </ChartsWrapper>
       </ChartsDataProvider>
     </Box>
   );

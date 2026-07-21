@@ -8,6 +8,7 @@
   --color-gray-150: #EDEDED;
   --color-gray-200: #DCDFE2;
   --color-gray-300: #DFDFDF;
+  --color-gray-500: #545454;
   --color-gray-600: #434343;
   --radius-sm: 3px;
   --text-sm: 13px;
@@ -76,5 +77,10 @@ tr:nth-child(odd) td {
 }
 
 .MuiChartsLegend-root {
-  padding-left: 60px;
+  margin: 0 100px;
+}
+
+.MuiBarChart-element {
+  fill-opacity: 0.3;
+  stroke: currentColor;
 }

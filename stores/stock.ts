@@ -62,7 +62,7 @@ export function useDisplayYearlyIncrease() {
     const thisMonth = currentRevenue[i]
     const lastYearMonth = currentRevenue[i - 12]
     const increase = (thisMonth.revenue / lastYearMonth.revenue - 1) * 100;
-    increases.push({ ...thisMonth, increase})
+    increases.push({ ...thisMonth, increase: increase === Infinity ? null : increase })
   }
   return increases
 }

@@ -1,3 +1,5 @@
+'use client';
+
 import { useRef, useLayoutEffect } from 'react';
 import { useDisplayStock, useDisplayYearlyIncrease } from '../stores/stock';
 
@@ -37,7 +39,7 @@ export default function StockTable() {
             <td className="sticky whitespace-nowrap py-3.5 px-5 font-semibold">單月營收年增率 (%)</td>
             {yearlyIncrease.map((increase) => (
               <td key={increase.date} className="whitespace-nowrap py-3.5 px-5 text-right">
-                { !increase.increase || increase?.increase === Infinity ? 'N/A' : increase?.increase?.toFixed(2)}
+                { !increase.increase ? 'N/A' : increase?.increase?.toFixed(2)}
               </td>
             ))}
           </tr>
