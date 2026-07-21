@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-interface Stock {
+export interface Stock {
   industry_category: string;
   stock_id: string;
   stock_name: string;
@@ -9,21 +9,22 @@ interface Stock {
 }
 
 export interface StockRevenue {
-  date: string,
-  stock_id: string,
-  country: string,
-  revenue: number,
-  revenue_month: number,
-  revenue_year: number,
-  create_time: string,
-  increase?: number
+  date: string;
+  stock_id: string;
+  country: string;
+  revenue: number;
+  revenue_month: number;
+  revenue_year: number;
+  create_time: string;
+  increase: number | null;
+  revenueShort: number;
 }
 
 interface StockState {
   currentStock: Stock | null;
   currentRevenue: Array<StockRevenue>;
   yearPeriod: number;
-  setCurrentStock: (newStock: Stock) => void;
+  setCurrentStock: (newStock: Stock | null) => void;
   setCurrentRevenue: (newRevenue: Array<StockRevenue>) => void;
   setYearPeriod: (year: number) => void;
 }
@@ -38,12 +39,12 @@ export const useStockStore = create<StockState>()((set) => ({
   },
   currentRevenue: [],
   yearPeriod: 5,
-  setCurrentStock: (newStock: Stock) => set({ currentStock: newStock }),
+  setCurrentStock: (newStock: Stock | null) => set({ currentStock: newStock }),
   setCurrentRevenue: (newRevenue: Array<StockRevenue>) => set({ currentRevenue: newRevenue }),
   setYearPeriod: (year: number) => set({ yearPeriod: year })
 }))
 
-export function useDisplayStock() {
+export function useDisplayStock(): StockRevenue[] {
   const currentRevenue = useStockStore((state) => state.currentRevenue);
   if (!currentRevenue || currentRevenue.length === 0) {
     return [];
@@ -51,7 +52,7 @@ export function useDisplayStock() {
   return currentRevenue.slice(12).map(x => ({...x, revenueShort: x.revenue / 1000}));
 }
 
-export function useDisplayYearlyIncrease() {
+export function useDisplayYearlyIncrease(): StockRevenue[]  {
   const currentRevenue = useStockStore((state) => state.currentRevenue);
   if (!currentRevenue || currentRevenue.length < 12 ) {
     return [];
