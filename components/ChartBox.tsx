@@ -10,9 +10,9 @@ export default function ChartBox() {
   const { yearPeriod, setYearPeriod } = useStockStore()
 
   return (
-    <div className="mt-4 border border-gray-300 bg-white rounded pt-4 px-5">
-      <div className="mb-3 flex justify-between">
-        <Button variant="contained">每月營收</Button>
+    <div className="mt-1.5 border border-gray-300 bg-white rounded-sm pt-4 px-5">
+      <div className="mb-3 flex justify-between items-center">
+        <Button variant="contained" disableElevation className="pointer-events-none">每月營收</Button>
         <Select
           size="small"
           value={yearPeriod}

@@ -16,8 +16,8 @@ export default function TableBox() {
     }
   }, [stockData]);
   return (
-    <div className="mt-4 border border-gray-300 bg-white rounded pt-4 px-5 pb-5">
-      <Button variant="contained" className="mb-4">詳細數據</Button>
+    <div className="mt-1.5 border border-gray-300 bg-white rounded pt-4 px-5 pb-5">
+      <Button variant="contained" disableElevation className="mb-4 pointer-events-none">詳細數據</Button>
       <div className="overflow-x-auto" ref={containerRef} >
         <table>
           <tbody>
