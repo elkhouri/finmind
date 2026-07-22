@@ -61,7 +61,13 @@ export function useDisplayRevenue(): StockRevenue[] {
     if (!currentRevenue || currentRevenue.length === 0) {
       return [];
     }
-    return currentRevenue.slice(12).map(x => ({ ...x, revenueShort: x.revenue / 1000 }));
+
+    const revenues = currentRevenue.length < 13 ? currentRevenue: currentRevenue.slice(12)
+
+    return revenues.map(r => { 
+      const rawShort = r.revenue / 1000
+      return {...r, revenueShort: Number.isFinite(rawShort) ? rawShort : 0}
+    });
   }, [currentRevenue])
 }
 
@@ -76,12 +82,12 @@ export function useDisplayYearlyIncrease(): StockRevenue[] {
       return currentRevenue.map(x => ({ ...x, increase: null }));
     }
 
-    const increases = []
+    const increases: StockRevenue[] = []
     for (let i = 12; i < currentRevenue.length; i++) {
       const thisMonth = currentRevenue[i]
       const lastYearMonth = currentRevenue[i - 12]
       const increase = (thisMonth.revenue / lastYearMonth.revenue - 1) * 100;
-      increases.push({ ...thisMonth, increase: increase === Infinity ? null : increase })
+      increases.push({ ...thisMonth, increase: Number.isFinite(increase) ? increase : null })
     }
     return increases
   }, [currentRevenue])
