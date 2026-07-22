@@ -11,16 +11,6 @@ import BaseBox from './BaseBox';
 export default function ChartBox() {
   const { yearPeriod, setYearPeriod, currentRevenue, isLoading } = useStockStore();
 
-  function ChartDisplay() {
-    if (isLoading) {
-      return <Skeleton variant="rounded" width="100%" height={400} />
-    } else if (currentRevenue?.length > 0) {
-      return <StockChart />
-    } else {
-      return <div className="text-center text-gray-600">無資料</div>
-    }
-  }
-
   return (
     <BaseBox className="mt-1.5">
       <div className="mb-3 flex justify-between items-center">
@@ -35,7 +25,13 @@ export default function ChartBox() {
           <MenuItem value={8}>近 8 年</MenuItem>
         </Select>
       </div>
-      <ChartDisplay />
+      {isLoading ? (
+        <Skeleton variant="rounded" width="100%" height={400} />
+      ) : currentRevenue?.length > 0 ? (
+        <StockChart />
+      ) : (
+        <div className="text-center text-gray-600">無資料</div>
+      )}
     </BaseBox>
   );
 }

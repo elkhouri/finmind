@@ -56,11 +56,11 @@ export const useStockStore = create<StockState>()((set) => ({
 // displays revenue starting from the 13th month since the first year data is only used to calculate yearly increase
 export function useDisplayRevenue(): StockRevenue[] {
   const currentRevenue = useStockStore((state) => state.currentRevenue);
-  if (!currentRevenue || currentRevenue.length === 0) {
-    return [];
-  }
 
   return useMemo(() => {
+    if (!currentRevenue || currentRevenue.length === 0) {
+      return [];
+    }
     return currentRevenue.slice(12).map(x => ({ ...x, revenueShort: x.revenue / 1000 }));
   }, [currentRevenue])
 }
@@ -68,13 +68,14 @@ export function useDisplayRevenue(): StockRevenue[] {
 // displays yearly increase percentages from the raw revenue data
 export function useDisplayYearlyIncrease(): StockRevenue[] {
   const currentRevenue = useStockStore((state) => state.currentRevenue);
-  if (!currentRevenue || currentRevenue.length === 0) {
-    return [];
-  } else if (currentRevenue.length < 13) {
-    return currentRevenue.map(x => ({ ...x, increase: null }));
-  }
 
   return useMemo(() => {
+    if (!currentRevenue || currentRevenue.length === 0) {
+      return [];
+    } else if (currentRevenue.length < 13) {
+      return currentRevenue.map(x => ({ ...x, increase: null }));
+    }
+
     const increases = []
     for (let i = 12; i < currentRevenue.length; i++) {
       const thisMonth = currentRevenue[i]

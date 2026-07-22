@@ -29,7 +29,7 @@ export default function StockSelect() {
     };
 
     fetchStockInfo();
-  }, []);
+  }, [setError]);
 
   // fetch stock revenue when the user selects stock or year period, with debounce
   useEffect(() => {
@@ -63,7 +63,7 @@ export default function StockSelect() {
       clearTimeout(debounceTimer);
       isValid = false;
     };
-  }, [currentStock, yearPeriod]);
+  }, [currentStock, setCurrentRevenue, setError, setIsLoading, yearPeriod]);
 
   // stock options that filters uniques by stock id since there's duplicates across industries etc.
   const stockOptions = useMemo(() => {
