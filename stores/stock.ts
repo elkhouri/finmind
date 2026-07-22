@@ -1,4 +1,5 @@
-import { create } from 'zustand'
+import { create } from 'zustand';
+import { useMemo } from 'react';
 
 export interface Stock {
   industry_category: string;
@@ -58,7 +59,10 @@ export function useDisplayRevenue(): StockRevenue[] {
   if (!currentRevenue || currentRevenue.length === 0) {
     return [];
   }
-  return currentRevenue.slice(12).map(x => ({ ...x, revenueShort: x.revenue / 1000 }));
+
+  return useMemo(() => {
+    return currentRevenue.slice(12).map(x => ({ ...x, revenueShort: x.revenue / 1000 }));
+  }, [currentRevenue])
 }
 
 // displays yearly increase percentages from the raw revenue data
@@ -70,12 +74,14 @@ export function useDisplayYearlyIncrease(): StockRevenue[] {
     return currentRevenue.map(x => ({ ...x, increase: null }));
   }
 
-  const increases = []
-  for (let i = 12; i < currentRevenue.length; i++) {
-    const thisMonth = currentRevenue[i]
-    const lastYearMonth = currentRevenue[i - 12]
-    const increase = (thisMonth.revenue / lastYearMonth.revenue - 1) * 100;
-    increases.push({ ...thisMonth, increase: increase === Infinity ? null : increase })
-  }
-  return increases
+  return useMemo(() => {
+    const increases = []
+    for (let i = 12; i < currentRevenue.length; i++) {
+      const thisMonth = currentRevenue[i]
+      const lastYearMonth = currentRevenue[i - 12]
+      const increase = (thisMonth.revenue / lastYearMonth.revenue - 1) * 100;
+      increases.push({ ...thisMonth, increase: increase === Infinity ? null : increase })
+    }
+    return increases
+  }, [currentRevenue])
 }

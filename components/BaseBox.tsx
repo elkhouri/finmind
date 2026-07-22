@@ -1,7 +1,7 @@
-import { ReactElement } from "react"
+import { ComponentPropsWithRef, ReactNode } from "react"
 
-interface BoxProps extends React.ComponentPropsWithRef<'div'> {
-  children: React.ReactNode; 
+interface BoxProps extends ComponentPropsWithRef<'div'> {
+  children: ReactNode;
 }
 
 export default function BaseBox({ children, className, ...props }: BoxProps) {

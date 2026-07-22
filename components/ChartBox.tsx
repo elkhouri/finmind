@@ -9,12 +9,13 @@ import { useStockStore } from '../stores/stock';
 import BaseBox from './BaseBox';
 
 export default function ChartBox() {
-  const { yearPeriod, setYearPeriod, currentRevenue, isLoading } = useStockStore()
-  function ChartDisplay () {
+  const { yearPeriod, setYearPeriod, currentRevenue, isLoading } = useStockStore();
+
+  function ChartDisplay() {
     if (isLoading) {
       return <Skeleton variant="rounded" width="100%" height={400} />
     } else if (currentRevenue?.length > 0) {
-      return <StockChart /> 
+      return <StockChart />
     } else {
       return <div className="text-center text-gray-600">無資料</div>
     }
