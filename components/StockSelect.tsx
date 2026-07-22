@@ -93,7 +93,7 @@ export default function StockSelect() {
       size='small'
       popupIcon={<SearchIcon />}
       renderInput={(params) => (
-        <TextField {...params} placeholder='輸入台／美股代號，查看公司價值' />
+        <TextField {...params} placeholder='輸入台股代號，查看公司價值' />
       )}
       onChange={(event, newValue) => {
         setCurrentStock(newValue);
