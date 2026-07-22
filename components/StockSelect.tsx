@@ -82,6 +82,7 @@ export default function StockSelect() {
 
   return (
     <Autocomplete
+      className="w-100"
       disablePortal
       disableClearable
       options={stockOptions}
@@ -89,7 +90,6 @@ export default function StockSelect() {
         option.stock_id + option.industry_category + option.type
       }
       getOptionLabel={(option) => `${option.stock_name} (${option.stock_id})`}
-      sx={{ width: 400 }}
       size='small'
       popupIcon={<SearchIcon />}
       renderInput={(params) => (

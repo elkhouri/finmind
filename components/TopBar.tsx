@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Box } from '@mui/material';
+import { AppBar, Toolbar } from '@mui/material';
 import StockSelect from './StockSelect';
 
 export default function TopBar() {
@@ -8,10 +8,8 @@ export default function TopBar() {
       elevation={0}
       className='border-b border-b-gray-300'
     >
-      <Toolbar className='bg-white py-2' variant='dense'>
-        <Box sx={{ flexGrow: 1 }} />
+      <Toolbar className='bg-white py-2 flex justify-center' variant='dense'>
         <StockSelect />
-        <Box sx={{ flexGrow: 1 }} />
       </Toolbar>
     </AppBar>
   );

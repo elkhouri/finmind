@@ -40,7 +40,7 @@ export default function StockChart() {
   ] as AllSeriesType[];
 
   return (
-    <Box sx={{ width: '100%', height: 400 }} className='relative'>
+    <Box className='relative w-full h-100'>
       <ChartsDataProvider
         series={series}
         xAxis={[
