@@ -16,35 +16,53 @@ export default function StockTable() {
   }, [displayRevenue]);
 
   return (
-    <div className="overflow-x-auto text-sm text-gray-600" ref={containerRef} >
+    <div className='overflow-x-auto text-sm text-gray-600' ref={containerRef}>
       <table>
         <tbody>
           <tr>
-            <td className="sticky whitespace-nowrap py-3.5 px-5 font-semibold">年度月份</td>
+            <td className='sticky whitespace-nowrap py-3.5 px-5 font-semibold'>
+              年度月份
+            </td>
             {displayRevenue.map((stock) => (
-              <td key={stock.date} className="whitespace-nowrap py-3.5 px-5 font-semibold text-right">
-                {new Date(stock.date).getFullYear().toString() + (new Date(stock.date).getMonth() + 1).toString().padStart(2, '0')}
+              <td
+                key={stock.date}
+                className='whitespace-nowrap py-3.5 px-5 font-semibold text-right'
+              >
+                {new Date(stock.date).getFullYear().toString() +
+                  (new Date(stock.date).getMonth() + 1)
+                    .toString()
+                    .padStart(2, '0')}
               </td>
             ))}
           </tr>
           <tr>
-            <td className="sticky whitespace-nowrap py-3.5 px-5 font-semibold">每月營收</td>
+            <td className='sticky whitespace-nowrap py-3.5 px-5 font-semibold'>
+              每月營收
+            </td>
             {displayRevenue.map((stock) => (
-              <td key={stock.date} className="whitespace-nowrap py-3.5 px-5 text-right">
-                { stock.revenueShort.toLocaleString() }
+              <td
+                key={stock.date}
+                className='whitespace-nowrap py-3.5 px-5 text-right'
+              >
+                {stock.revenueShort.toLocaleString()}
               </td>
             ))}
           </tr>
           <tr>
-            <td className="sticky whitespace-nowrap py-3.5 px-5 font-semibold">單月營收年增率 (%)</td>
+            <td className='sticky whitespace-nowrap py-3.5 px-5 font-semibold'>
+              單月營收年增率 (%)
+            </td>
             {yearlyIncrease.map((increase) => (
-              <td key={increase.date} className="whitespace-nowrap py-3.5 px-5 text-right">
-                { !increase.increase ? 'N/A' : increase?.increase?.toFixed(2)}
+              <td
+                key={increase.date}
+                className='whitespace-nowrap py-3.5 px-5 text-right'
+              >
+                {!increase.increase ? 'N/A' : increase?.increase?.toFixed(2)}
               </td>
             ))}
           </tr>
         </tbody>
       </table>
     </div>
-  )
+  );
 }

@@ -73,7 +73,7 @@ tr:nth-child(odd) td {
 }
 
 .MuiInputBase-colorPrimary.MuiSelect-root svg {
-  color: var(--color-white);;
+  color: var(--color-white);
 }
 
 .MuiChartsLegend-root {

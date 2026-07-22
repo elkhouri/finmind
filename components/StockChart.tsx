@@ -40,7 +40,7 @@ export default function StockChart() {
   ] as AllSeriesType[];
 
   return (
-    <Box sx={{ width: '100%', height: 400 }} className="relative">
+    <Box sx={{ width: '100%', height: 400 }} className='relative'>
       <ChartsDataProvider
         series={series}
         xAxis={[
@@ -49,8 +49,10 @@ export default function StockChart() {
             data: displayRevenue.map((day) => new Date(day.date)),
             scaleType: 'band',
             valueFormatter: (value, context) => {
-              if(context.location === 'tick') return new Date(value).getFullYear().toString()
-              else return new Date(value).toLocaleDateString();},
+              if (context.location === 'tick')
+                return new Date(value).getFullYear().toString();
+              else return new Date(value).toLocaleDateString();
+            },
             height: 30,
           },
         ]}
@@ -59,7 +61,7 @@ export default function StockChart() {
             id: 'price',
             scaleType: 'linear',
             position: 'right',
-            width: 50
+            width: 50,
           },
           {
             id: 'revenue',
@@ -70,10 +72,14 @@ export default function StockChart() {
           },
         ]}
       >
-        <ChartsWrapper legendPosition={{horizontal: 'start'}}>
-          <ChartsLegend direction="horizontal" />
-          <div className="absolute left-10 top-0 text-sm font-semibold text-gray-500">千元</div>
-          <div className="absolute right-12 top-0 text-sm font-semibold text-gray-500">%</div>
+        <ChartsWrapper legendPosition={{ horizontal: 'start' }}>
+          <ChartsLegend direction='horizontal' />
+          <div className='absolute left-10 top-0 text-sm font-semibold text-gray-500'>
+            千元
+          </div>
+          <div className='absolute right-12 top-0 text-sm font-semibold text-gray-500'>
+            %
+          </div>
           <ChartsSurface>
             {/* <ChartsAxisHighlight x="line" /> */}
             <BarPlot />
@@ -82,23 +88,23 @@ export default function StockChart() {
 
             <LineHighlightPlot />
             <ChartsXAxis
-              axisId="date"
+              axisId='date'
               tickInterval={(value, index) => {
                 return value.getMonth() === 0 || index === 0;
               }}
               tickLabelStyle={{
                 fontSize: 12,
-                fill: 'var(--color-gray-500)'
+                fill: 'var(--color-gray-500)',
               }}
             />
             <ChartsYAxis
               // label="單月營收年增率 (%)"
-              axisId="price"
+              axisId='price'
               tickLabelStyle={{ fontSize: 12, fill: 'var(--color-gray-500)' }}
             />
             <ChartsYAxis
               // label="每月營收"
-              axisId="revenue"
+              axisId='revenue'
               tickLabelStyle={{ fontSize: 12, fill: 'var(--color-gray-500)' }}
             />
             <ChartsTooltip />

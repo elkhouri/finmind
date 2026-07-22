@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
@@ -9,9 +9,9 @@ export default function ErrorBar() {
   const setError = useStockStore((state) => state.setError);
 
   function handleClose() {
-    setError('')
+    setError('');
   }
-  
+
   return (
     <Snackbar
       open={!!error}
@@ -19,7 +19,9 @@ export default function ErrorBar() {
       autoHideDuration={3000}
       onClose={handleClose}
     >
-      <Alert severity="error" onClose={handleClose}>{ error }</Alert>
+      <Alert severity='error' onClose={handleClose}>
+        {error}
+      </Alert>
     </Snackbar>
-  )
+  );
 }

@@ -6,9 +6,8 @@ import TableDisclaimer from '@/components/TableDisclaimer';
 import ErrorAlert from '@/components/ErrorAlert';
 
 export default function Home() {
-
   return (
-    <Container maxWidth="md">
+    <Container maxWidth='md'>
       <ErrorAlert />
       <StockBox />
       <ChartBox />
