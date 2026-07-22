@@ -3,13 +3,13 @@ import StockBox from '../components/StockBox';
 import ChartBox from '../components/ChartBox';
 import TableBox from '../components/TableBox';
 import TableDisclaimer from '@/components/TableDisclaimer';
-import ErrorBar from '@/components/ErrorBar';
+import ErrorAlert from '@/components/ErrorAlert';
 
 export default function Home() {
 
   return (
     <Container maxWidth="md">
-      <ErrorBar />
+      <ErrorAlert />
       <StockBox />
       <ChartBox />
       <TableBox />
