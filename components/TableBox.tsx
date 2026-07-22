@@ -25,7 +25,7 @@ export default function TableBox() {
       ) : stockData?.length > 0 ? (
         <StockTable />
       ) : (
-        <div className='text-center text-base'>無資料</div>
+        <div className='text-center text-gray-600'>無資料</div>
       )}
     </BaseBox>
   );
