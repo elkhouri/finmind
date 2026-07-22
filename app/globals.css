@@ -19,7 +19,7 @@ body {
 }
 
 /* table styles */
-table {
+table.striped {
   border-collapse: separate;
   border-spacing: 0;
 }
@@ -29,12 +29,12 @@ td.sticky {
   z-index: 2;
   left: 0;
 }
-td {
+.striped td {
   background: var(--color-white);
   border: 1px solid var(--color-gray-200);
 }
 
-tr:nth-child(odd) td {
+.striped tr:nth-child(odd) td {
   background: var(--color-gray-100);
 }
 

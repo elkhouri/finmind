@@ -17,7 +17,7 @@ export default function StockTable() {
 
   return (
     <div className='overflow-x-auto text-sm text-gray-600' ref={containerRef}>
-      <table>
+      <table className="striped">
         <tbody>
           <tr>
             <td className='sticky whitespace-nowrap py-3.5 px-5 font-semibold'>
