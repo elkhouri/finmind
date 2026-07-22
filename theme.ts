@@ -4,7 +4,7 @@ import { createTheme } from '@mui/material/styles';
 const theme = createTheme({
   cssVariables: true,
   typography: {
-    fontFamily: 'var(--font-roboto)',
+    fontFamily: 'var(--default-font-family)',
   },
   breakpoints: {
     values: {
@@ -15,7 +15,7 @@ const theme = createTheme({
       xl: 1536,
     },
   },
-   palette: {
+  palette: {
     primary: {
       main: '#0386F4',
     },
