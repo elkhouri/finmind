@@ -5,6 +5,7 @@ import './globals.css';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../theme';
 import TopBar from '../components/TopBar';
+import { StockStoreProvider } from '@/providers/stockProvider'
 
 const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
@@ -28,8 +29,10 @@ export default function RootLayout({
       <body className='min-h-full flex flex-col'>
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
           <ThemeProvider theme={theme}>
-            <TopBar />
-            {children}
+            <StockStoreProvider>
+              <TopBar />
+              {children}
+            </StockStoreProvider>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useStockStore } from '../stores/stock';
+import { useStockStore } from '@/providers/stockProvider';
 import BaseBox from './BaseBox';
 
 export default function StockIndicator() {

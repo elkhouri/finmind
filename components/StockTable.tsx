@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useLayoutEffect } from 'react';
-import { useDisplayRevenue, useDisplayYearlyIncrease } from '../stores/stock';
+import { useDisplayRevenue, useDisplayYearlyIncrease } from '@/hooks/stockHooks';
 
 export default function StockTable() {
   const containerRef = useRef<HTMLDivElement>(null);

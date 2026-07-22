@@ -2,7 +2,7 @@
 
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-import { useStockStore } from '../stores/stock';
+import { useStockStore } from '@/providers/stockProvider';
 
 export default function ErrorBar() {
   const error = useStockStore((state) => state.error);

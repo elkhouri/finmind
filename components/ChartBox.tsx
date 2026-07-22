@@ -5,7 +5,7 @@ import StockChart from './StockChart';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Skeleton from '@mui/material/Skeleton';
-import { useStockStore } from '../stores/stock';
+import { useStockStore } from '@/providers/stockProvider';
 import BaseBox from './BaseBox';
 
 export default function ChartBox() {

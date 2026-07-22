@@ -1,4 +1,4 @@
-import type { Stock, StockRevenue } from '../stores/stock';
+import type { Stock, StockRevenue } from '@/stores/stockStore';
 
 export async function getStockInfo (): Promise<Stock[]> {
   const response = await fetch('https://api.finmindtrade.com/api/v4/data?dataset=TaiwanStockInfo');

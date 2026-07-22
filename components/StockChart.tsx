@@ -13,7 +13,7 @@ import { ChartsGrid } from '@mui/x-charts/ChartsGrid';
 import { ChartsWrapper } from '@mui/x-charts/ChartsWrapper';
 import { ChartsTooltip } from '@mui/x-charts/ChartsTooltip';
 // import { ChartsAxisHighlight } from '@mui/x-charts/ChartsAxisHighlight';
-import { useDisplayRevenue, useDisplayYearlyIncrease } from '../stores/stock';
+import { useDisplayRevenue, useDisplayYearlyIncrease } from '@/hooks/stockHooks';
 
 export default function StockChart() {
   const displayRevenue = useDisplayRevenue();

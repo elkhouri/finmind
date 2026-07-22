@@ -6,7 +6,8 @@ import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
 import { useState, useEffect, useMemo } from 'react';
 import { getStockInfo, getStockRevenue } from '../lib/data';
-import { type Stock, useStockStore } from '../stores/stock';
+import type { Stock } from '@/stores/stockStore';
+import { useStockStore } from '@/providers/stockProvider';
 
 export default function StockSelect() {
   const [stockInfo, setStockInfo] = useState<Stock[]>([]);

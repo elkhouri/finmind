@@ -3,7 +3,8 @@
 import Button from '@mui/material/Button';
 import Skeleton from '@mui/material/Skeleton';
 import StockTable from './StockTable';
-import { useDisplayRevenue, useStockStore } from '../stores/stock';
+import { useDisplayRevenue } from '@/hooks/stockHooks';
+import { useStockStore } from '@/providers/stockProvider';
 import BaseBox from './BaseBox';
 
 export default function TableBox() {
