@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #0386F4;
+  --color-primary: var(--mui-palette-primary-main);
   --color-gray-50: #FAFAFA;
   --color-gray-100: #F6F8FA;
   --color-gray-150: #EDEDED;
@@ -18,6 +18,7 @@ body {
   background: var(--color-gray-150);
 }
 
+/* table styles */
 table {
   border-collapse: separate;
   border-spacing: 0;
@@ -37,6 +38,7 @@ tr:nth-child(odd) td {
   background: var(--color-gray-100);
 }
 
+/* MUI customization */
 .MuiAutocomplete-inputRoot fieldset {
   border-color: var(--color-gray-300);
 }
@@ -83,4 +85,8 @@ tr:nth-child(odd) td {
 .MuiBarChart-element {
   fill-opacity: 0.3;
   stroke: currentColor;
+}
+
+.MuiAutocomplete-popupIndicatorOpen {
+  transform: none;
 }

@@ -2,19 +2,9 @@
 import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
+  cssVariables: true,
   typography: {
     fontFamily: 'var(--font-roboto)',
-  },
-  components: {
-    MuiAutocomplete: {
-      styleOverrides: {
-        root: {
-          '.MuiAutocomplete-popupIndicatorOpen': {
-            transform: 'none',
-          },
-        },
-      },
-    },
   },
   breakpoints: {
     values: {
