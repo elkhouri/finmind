@@ -9,11 +9,14 @@ import {
   Autocomplete
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import Skeleton from '@mui/material/Skeleton';
+import Stack from '@mui/material/Stack';
 import { getStockInfo, getStockRevenue } from '../lib/data';
 import { type Stock, useStockStore } from '../stores/stock';
 
 export default function TopBar() {
   const [stockInfo, setStockInfo] = useState<Stock[]>([]);
+  const [stockInfoLoading, setStockInfoLoading] = useState(false);
   const { setCurrentStock, currentStock, setCurrentRevenue, yearPeriod, isLoading, setIsLoading, error, setError } = useStockStore()
 
   // fetch stock info once since it doesn't change much
@@ -21,12 +24,14 @@ export default function TopBar() {
     const fetchStockInfo = async () => {
       setError('');
       try {
+        setStockInfoLoading(true);
         const data = await getStockInfo();
         setStockInfo(data);
       } catch (e) {
         setError(e instanceof Error ? e.message : "An error occurred");
         setStockInfo([]);
       }
+      setStockInfoLoading(false);
     };
 
     fetchStockInfo();
@@ -91,7 +96,10 @@ export default function TopBar() {
           renderInput={(params) => <TextField {...params} placeholder="輸入台／美股代號，查看公司價值" />}
           onChange={(event, newValue) => {
             setCurrentStock(newValue);
+            setCurrentRevenue([]);
           }}
+          loading={stockInfoLoading}
+          loadingText={<Stack>{ Array.from({ length: 5 }, (_, i) => <Skeleton key={i} height={40}/>) }</Stack>}
         />
         <Box sx={{ flexGrow: 1 }} />
       </Toolbar>

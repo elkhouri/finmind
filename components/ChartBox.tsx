@@ -4,18 +4,14 @@ import Button from '@mui/material/Button';
 import StockChart from './StockChart';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import CircularProgress from '@mui/material/CircularProgress';
+import Skeleton from '@mui/material/Skeleton';
 import { useStockStore } from '../stores/stock';
 
 export default function ChartBox() {
   const { yearPeriod, setYearPeriod, currentRevenue, isLoading } = useStockStore()
   function ChartDisplay () {
     if (isLoading) {
-      return (
-        <div className="flex justify-center">
-          <CircularProgress aria-label="Loading…" />
-        </div>
-      )
+      return <Skeleton variant="rounded" width="100%" height={400} />
     } else if (currentRevenue?.length > 0) {
       return <StockChart /> 
     } else {

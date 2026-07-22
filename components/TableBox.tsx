@@ -1,7 +1,7 @@
 'use client';
 
 import Button from '@mui/material/Button';
-import CircularProgress from '@mui/material/CircularProgress';
+import Skeleton from '@mui/material/Skeleton';
 import StockTable from './StockTable';
 import { useDisplayStock, useStockStore } from '../stores/stock';
 
@@ -11,11 +11,7 @@ export default function TableBox() {
 
   function TableDisplay () {
     if (isLoading) {
-      return (
-        <div className="flex justify-center">
-          <CircularProgress aria-label="Loading…" />
-        </div>
-      )
+      return <Skeleton variant="rounded" width="100%" height={150} />
     } else if (stockData?.length > 0) {
       return <StockTable /> 
     } else {
