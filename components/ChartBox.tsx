@@ -6,6 +6,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Skeleton from '@mui/material/Skeleton';
 import { useStockStore } from '../stores/stock';
+import BaseBox from './BaseBox';
 
 export default function ChartBox() {
   const { yearPeriod, setYearPeriod, currentRevenue, isLoading } = useStockStore()
@@ -20,7 +21,7 @@ export default function ChartBox() {
   }
 
   return (
-    <div className="mt-1.5 border border-gray-300 bg-white rounded-sm py-4 px-5">
+    <BaseBox className="mt-1.5">
       <div className="mb-3 flex justify-between items-center">
         <Button variant="contained" disableElevation className="pointer-events-none">每月營收</Button>
         <Select
@@ -34,6 +35,6 @@ export default function ChartBox() {
         </Select>
       </div>
       <ChartDisplay />
-    </div>
+    </BaseBox>
   );
 }

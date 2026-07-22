@@ -16,7 +16,7 @@ export default function StockTable() {
   }, [stockData]);
 
   return (
-    <div className="overflow-x-auto" ref={containerRef} >
+    <div className="overflow-x-auto text-sm text-gray-600" ref={containerRef} >
       <table>
         <tbody>
           <tr>
