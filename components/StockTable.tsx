@@ -1,11 +1,11 @@
 'use client';
 
 import { useRef, useLayoutEffect } from 'react';
-import { useDisplayStock, useDisplayYearlyIncrease } from '../stores/stock';
+import { useDisplayRevenue, useDisplayYearlyIncrease } from '../stores/stock';
 
 export default function StockTable() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const stockData = useDisplayStock();
+  const displayRevenue = useDisplayRevenue();
   const yearlyIncrease = useDisplayYearlyIncrease();
 
   useLayoutEffect(() => {
@@ -13,7 +13,7 @@ export default function StockTable() {
     if (container) {
       container.scrollLeft = container.scrollWidth;
     }
-  }, [stockData]);
+  }, [displayRevenue]);
 
   return (
     <div className="overflow-x-auto text-sm text-gray-600" ref={containerRef} >
@@ -21,7 +21,7 @@ export default function StockTable() {
         <tbody>
           <tr>
             <td className="sticky whitespace-nowrap py-3.5 px-5 font-semibold">年度月份</td>
-            {stockData.map((stock) => (
+            {displayRevenue.map((stock) => (
               <td key={stock.date} className="whitespace-nowrap py-3.5 px-5 font-semibold text-right">
                 {new Date(stock.date).getFullYear().toString() + (new Date(stock.date).getMonth() + 1).toString().padStart(2, '0')}
               </td>
@@ -29,7 +29,7 @@ export default function StockTable() {
           </tr>
           <tr>
             <td className="sticky whitespace-nowrap py-3.5 px-5 font-semibold">每月營收</td>
-            {stockData.map((stock) => (
+            {displayRevenue.map((stock) => (
               <td key={stock.date} className="whitespace-nowrap py-3.5 px-5 text-right">
                 { stock.revenueShort.toLocaleString() }
               </td>

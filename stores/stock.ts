@@ -52,18 +52,22 @@ export const useStockStore = create<StockState>()((set) => ({
   setError: (e: string) => set({ error: e })
 }))
 
-export function useDisplayStock(): StockRevenue[] {
+// displays revenue starting from the 13th month since the first year data is only used to calculate yearly increase
+export function useDisplayRevenue(): StockRevenue[] {
   const currentRevenue = useStockStore((state) => state.currentRevenue);
   if (!currentRevenue || currentRevenue.length === 0) {
     return [];
   }
-  return currentRevenue.slice(12).map(x => ({...x, revenueShort: x.revenue / 1000}));
+  return currentRevenue.slice(12).map(x => ({ ...x, revenueShort: x.revenue / 1000 }));
 }
 
-export function useDisplayYearlyIncrease(): StockRevenue[]  {
+// displays yearly increase percentages from the raw revenue data
+export function useDisplayYearlyIncrease(): StockRevenue[] {
   const currentRevenue = useStockStore((state) => state.currentRevenue);
-  if (!currentRevenue || currentRevenue.length < 12 ) {
+  if (!currentRevenue || currentRevenue.length === 0) {
     return [];
+  } else if (currentRevenue.length < 13) {
+    return currentRevenue.map(x => ({ ...x, increase: null }));
   }
 
   const increases = []

@@ -12,11 +12,11 @@ import { ChartsYAxis } from '@mui/x-charts/ChartsYAxis';
 import { ChartsGrid } from '@mui/x-charts/ChartsGrid';
 import { ChartsWrapper } from '@mui/x-charts/ChartsWrapper';
 import { ChartsTooltip } from '@mui/x-charts/ChartsTooltip';
-import { ChartsAxisHighlight } from '@mui/x-charts/ChartsAxisHighlight';
-import { useDisplayStock, useDisplayYearlyIncrease } from '../stores/stock';
+// import { ChartsAxisHighlight } from '@mui/x-charts/ChartsAxisHighlight';
+import { useDisplayRevenue, useDisplayYearlyIncrease } from '../stores/stock';
 
 export default function StockChart() {
-  const stockData = useDisplayStock();
+  const displayRevenue = useDisplayRevenue();
   const yearlyIncrease = useDisplayYearlyIncrease();
 
   const series = [
@@ -25,7 +25,7 @@ export default function StockChart() {
       yAxisId: 'revenue',
       label: '每月營收',
       color: '#E8AF00',
-      data: stockData.map((day) => day.revenueShort),
+      data: displayRevenue.map((day) => day.revenueShort),
       highlightScope: { highlight: 'item' },
     },
     {
@@ -46,7 +46,7 @@ export default function StockChart() {
         xAxis={[
           {
             id: 'date',
-            data: stockData.map((day) => new Date(day.date)),
+            data: displayRevenue.map((day) => new Date(day.date)),
             scaleType: 'band',
             valueFormatter: (value, context) => {
               if(context.location === 'tick') return new Date(value).getFullYear().toString()

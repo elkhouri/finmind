@@ -3,11 +3,11 @@
 import Button from '@mui/material/Button';
 import Skeleton from '@mui/material/Skeleton';
 import StockTable from './StockTable';
-import { useDisplayStock, useStockStore } from '../stores/stock';
+import { useDisplayRevenue, useStockStore } from '../stores/stock';
 import BaseBox from './BaseBox';
 
 export default function TableBox() {
-  const stockData = useDisplayStock();
+  const stockData = useDisplayRevenue();
   const isLoading = useStockStore((state) => state.isLoading);
 
   function TableDisplay () {
