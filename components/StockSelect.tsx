@@ -11,14 +11,12 @@ import { type Stock, useStockStore } from '../stores/stock';
 export default function StockSelect() {
   const [stockInfo, setStockInfo] = useState<Stock[]>([]);
   const [stockInfoLoading, setStockInfoLoading] = useState(false);
-  const {
-    setCurrentStock,
-    currentStock,
-    setCurrentRevenue,
-    yearPeriod,
-    setIsLoading,
-    setError,
-  } = useStockStore();
+  const setCurrentStock = useStockStore((state) => state.setCurrentStock);
+  const currentStock = useStockStore((state) => state.currentStock);
+  const setCurrentRevenue = useStockStore((state) => state.setCurrentRevenue);
+  const yearPeriod = useStockStore((state) => state.yearPeriod);
+  const setIsLoading = useStockStore((state) => state.setIsLoading);
+  const setError = useStockStore((state) => state.setError);
 
   // fetch stock info once since it doesn't change much
   useEffect(() => {

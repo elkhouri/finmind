@@ -9,8 +9,10 @@ import { useStockStore } from '../stores/stock';
 import BaseBox from './BaseBox';
 
 export default function ChartBox() {
-  const { yearPeriod, setYearPeriod, currentRevenue, isLoading } =
-    useStockStore();
+  const yearPeriod = useStockStore((state) => state.yearPeriod);
+  const setYearPeriod = useStockStore((state) => state.setYearPeriod);
+  const currentRevenue = useStockStore((state) => state.currentRevenue);
+  const isLoading = useStockStore((state) => state.isLoading);
 
   return (
     <BaseBox className='mt-1.5'>
